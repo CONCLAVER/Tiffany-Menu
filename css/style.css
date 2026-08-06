@@ -113,7 +113,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     height: auto;
     margin: 0 auto;
     user-select: none;
-    transform: translateZ(50px);
+    transform: translateZ(38px);
 }
 .hero__title,
 .hero__subtitle { display: none; }

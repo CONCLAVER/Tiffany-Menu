@@ -101,10 +101,10 @@
             var r = hero.getBoundingClientRect();
             var px = (e.clientX - r.left) / r.width - 0.5;
             var py = (e.clientY - r.top) / r.height - 0.5;
-            targetRY = px * 16;
-            targetRX = -py * 12;
-            targetTX = px * 16;
-            targetTY = py * 12;
+            targetRY = px * 12;
+            targetRX = -py * 9;
+            targetTX = px * 12;
+            targetTY = py * 9;
         });
 
         hero.addEventListener('mouseleave', function () {
@@ -121,9 +121,9 @@
             curTY += (targetTY - curTY) * 0.08;
             logoCard.style.transform =
                 'perspective(900px) rotateX(' + curRX.toFixed(2) + 'deg) rotateY(' + curRY.toFixed(2) + 'deg)' +
-                ' translate3d(' + curTX.toFixed(1) + 'px,' + curTY.toFixed(1) + 'px,0) scale(1.03)';
+                ' translate3d(' + curTX.toFixed(1) + 'px,' + curTY.toFixed(1) + 'px,0) scale(1.0225)';
             logoCard.style.boxShadow =
-                (-curRY * 1.8).toFixed(1) + 'px ' + (curRX * 1.8 + 22).toFixed(1) + 'px 48px rgba(45,82,96,.20)';
+                (-curRY * 1.35).toFixed(1) + 'px ' + (curRX * 1.35 + 22).toFixed(1) + 'px 48px rgba(45,82,96,.20)';
             requestAnimationFrame(floatLoop);
         })();
     }
