@@ -346,12 +346,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     font-style: italic;
 }
 
-/* Bar category overrides — flat layout on brand teal, as in reference */
+/* Bar category overrides — card layout like food menu */
 .menu-section--bar .menu-category {
-    background: var(--bar-card-bg);
-    border: none;
-    box-shadow: none;
-    padding: 12px 4px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--bar-border);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 16px rgba(0,0,0,.1);
+    padding: 28px 24px;
 }
 .menu-section--bar .category-title {
     color: var(--food-accent);
