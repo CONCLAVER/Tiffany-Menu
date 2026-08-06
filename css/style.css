@@ -328,8 +328,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .category-title {
     font-family: var(--font-heading);
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--food-accent);
     margin-bottom: 20px;
     padding-bottom: 10px;
@@ -358,10 +358,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     color: var(--food-accent);
     border-bottom-color: var(--bar-border);
     border-bottom-width: 1px;
-    font-weight: 400;
-    letter-spacing: 3px;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 20px;
 }
 .menu-section--bar .category-note {
     color: var(--bar-text-muted);
