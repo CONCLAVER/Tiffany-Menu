@@ -361,8 +361,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     border-bottom-color: var(--bar-border);
     border-bottom-width: 1px;
     font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    letter-spacing: 1px;
     font-size: 20px;
 }
 .menu-section--bar .category-note {
