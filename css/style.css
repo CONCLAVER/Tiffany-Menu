@@ -193,11 +193,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     justify-content: space-between;
 }
 .nav__logo {
-    font-family: var(--font-heading);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--food-text);
-    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+.nav__logo-img {
+    height: 28px;
+    width: auto;
 }
 .nav__links { display: flex; gap: 24px; }
 .nav__link {
@@ -240,7 +241,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     margin-bottom: 40px;
     position: relative;
 }
-.section-title--food { color: var(--food-text); }
+.section-title--food {
+    color: var(--food-text);
+    font-family: var(--font-category);
+    font-weight: 700;
+}
 .section-title--food::after {
     content: '';
     display: block;
