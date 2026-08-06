@@ -64,15 +64,12 @@
                     }
                 });
 
-                // Keep the user inside the section after it shrinks
+                // Always scroll to show the section title after filtering
                 var sectionEl = filterBar.closest('.menu-section');
                 if (sectionEl) {
                     var navH = 76;
                     var sTop = sectionEl.getBoundingClientRect().top + window.pageYOffset;
-                    var sBottom = sTop + sectionEl.offsetHeight;
-                    if (window.pageYOffset + navH > sBottom - 120) {
-                        window.scrollTo({ top: Math.max(0, sTop - navH), behavior: 'smooth' });
-                    }
+                    window.scrollTo({ top: Math.max(0, sTop - navH), behavior: 'smooth' });
                 }
             });
         });
