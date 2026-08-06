@@ -282,6 +282,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     justify-content: center;
     gap: 8px;
     margin-bottom: 40px;
+    position: sticky;
+    top: 76px;
+    z-index: 40;
+    background: var(--food-bg);
+    padding: 14px 24px;
+    margin-left: -20px;
+    margin-right: -20px;
+    box-shadow: 0 6px 20px -12px rgba(0,0,0,.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 .filter-btn {
     padding: 8px 18px;
@@ -304,6 +314,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* Bar filters */
+.filters--bar {
+    background: var(--bar-bg);
+    box-shadow: 0 6px 20px -12px rgba(0,0,0,.35);
+}
 .filters--bar .filter-btn {
     border-color: var(--bar-border);
     color: var(--bar-text-muted);
