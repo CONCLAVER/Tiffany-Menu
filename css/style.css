@@ -354,7 +354,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     padding: 12px 4px;
 }
 .menu-section--bar .category-title {
-    color: var(--bar-text);
+    color: var(--food-accent);
     border-bottom-color: var(--bar-border);
     border-bottom-width: 1px;
     font-weight: 400;
