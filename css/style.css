@@ -548,7 +548,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     margin-bottom: 16px;
 }
 .footer__stamp {
-    width: 64px;
+    width: 140px;
     height: auto;
     flex-shrink: 0;
     user-select: none;
@@ -629,6 +629,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     }
     .logo-tiffany { width: 220px; height: auto; }
     .hero__logo-card { padding: 24px 32px; }
+    .footer__content { gap: 16px; }
+    .footer__stamp { width: 96px; }
+    .footer__logo-main { width: 200px; }
     .hero-card__icon { width: 36px; height: 36px; }
     .hero-card__label { font-size: 20px; }
     .hero-card__desc { font-size: 11px; }
