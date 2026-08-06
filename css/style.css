@@ -197,7 +197,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     align-items: center;
 }
 .nav__logo-img {
-    height: 28px;
+    height: 36px;
     width: auto;
 }
 .nav__links { display: flex; gap: 24px; }
@@ -255,7 +255,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     margin: 12px auto 0;
     border-radius: 2px;
 }
-.section-title--bar { color: var(--bar-text); }
+.section-title--bar {
+    color: var(--bar-text);
+    font-family: var(--font-category);
+    font-weight: 700;
+}
 .section-title--bar::after {
     content: '';
     display: block;
@@ -536,11 +540,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     text-align: center;
     border-top: 1px solid var(--bar-border);
 }
-.footer__logo {
+.footer__content {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 24px;
     margin-bottom: 16px;
 }
 .footer__stamp {
@@ -549,18 +553,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     flex-shrink: 0;
     user-select: none;
 }
-.footer__brand {
-    font-family: var(--font-heading);
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--bar-text);
-    letter-spacing: 2px;
-}
-.footer__brand em {
-    font-style: italic;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 16px;
+.footer__logo-main {
+    width: 200px;
+    height: auto;
+    user-select: none;
 }
 .footer__copy {
     font-size: 12px;
