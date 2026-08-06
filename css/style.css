@@ -25,6 +25,7 @@
 
     /* Shared */
     --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-category: 'Playfair Display', Georgia, serif;
     --font-body: 'Montserrat', 'Segoe UI', sans-serif;
     --radius: 12px;
     --radius-sm: 8px;
@@ -327,7 +328,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     display: none;
 }
 .category-title {
-    font-family: var(--font-heading);
+    font-family: var(--font-category);
     font-size: 24px;
     font-weight: 700;
     color: var(--food-accent);
@@ -355,6 +356,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     padding: 28px 24px;
 }
 .menu-section--bar .category-title {
+    font-family: var(--font-category);
     color: var(--food-accent);
     border-bottom-color: var(--bar-border);
     border-bottom-width: 1px;
