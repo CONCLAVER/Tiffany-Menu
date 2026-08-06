@@ -380,6 +380,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     font-size: 16px;
 }
 
+/* Tea list: 2-column layout */
+.tea-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 24px;
+}
+.tea-list li {
+    font-size: 13px;
+    color: var(--bar-text-muted);
+    line-height: 1.4;
+}
+.menu-section--bar .tea-list li {
+    color: var(--bar-text-muted);
+}
+@media (max-width: 480px) {
+    .tea-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ========================================
    MENU ITEM
    ======================================== */
