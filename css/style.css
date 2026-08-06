@@ -103,6 +103,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 .logo-tiffany {
     display: block;

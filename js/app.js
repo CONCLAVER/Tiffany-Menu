@@ -89,4 +89,33 @@
     style.textContent = '@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
     document.head.appendChild(style);
 
+    // --- Floating logo card: 3D tilt follows the mouse ---
+    var logoCard = document.querySelector('.hero__logo-card');
+    var hero = document.getElementById('hero');
+
+    if (logoCard && hero && window.matchMedia('(pointer: fine)').matches) {
+        var targetRX = 0, targetRY = 0, curRX = 0, curRY = 0;
+
+        hero.addEventListener('mousemove', function (e) {
+            var r = hero.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width - 0.5;
+            var py = (e.clientY - r.top) / r.height - 0.5;
+            targetRY = px * 10;
+            targetRX = -py * 8;
+        });
+
+        hero.addEventListener('mouseleave', function () {
+            targetRX = 0;
+            targetRY = 0;
+        });
+
+        (function floatLoop() {
+            curRX += (targetRX - curRX) * 0.06;
+            curRY += (targetRY - curRY) * 0.06;
+            logoCard.style.transform =
+                'perspective(900px) rotateX(' + curRX.toFixed(2) + 'deg) rotateY(' + curRY.toFixed(2) + 'deg)';
+            requestAnimationFrame(floatLoop);
+        })();
+    }
+
 })();
