@@ -154,31 +154,38 @@
             var r = hero.getBoundingClientRect();
             var x = (e.clientX - r.left) * dpr;
             var y = (e.clientY - r.top) * dpr;
-            if (Math.hypot(x - lastRX, y - lastRY) > 28 * dpr) {
+            if (Math.hypot(x - lastRX, y - lastRY) > 18 * dpr) {
                 lastRX = x;
                 lastRY = y;
-                ripples.push({ x: x, y: y, r: 2 * dpr, a: 0.5 });
-                if (ripples.length > 40) ripples.shift();
+                ripples.push({
+                    x: x,
+                    y: y,
+                    r: (70 + Math.random() * 30) * dpr,
+                    a: 0.28,
+                    decay: 0.006 + Math.random() * 0.004
+                });
+                if (ripples.length > 30) ripples.shift();
             }
         });
 
         (function waterLoop() {
             wctx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
+            wctx.globalCompositeOperation = 'lighter';
             for (var i = ripples.length - 1; i >= 0; i--) {
                 var p = ripples[i];
-                p.r += (1.6 + p.r * 0.02) * dpr;
-                p.a -= 0.008;
+                p.r += 0.35 * dpr;
+                p.a -= p.decay;
                 if (p.a <= 0) { ripples.splice(i, 1); continue; }
-                wctx.lineWidth = 1.6 * dpr;
-                wctx.strokeStyle = 'rgba(255,255,255,' + (p.a * 0.9).toFixed(3) + ')';
+                var g = wctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+                g.addColorStop(0, 'rgba(255,252,244,' + p.a.toFixed(3) + ')');
+                g.addColorStop(0.55, 'rgba(255,252,244,' + (p.a * 0.45).toFixed(3) + ')');
+                g.addColorStop(1, 'rgba(255,252,244,0)');
+                wctx.fillStyle = g;
                 wctx.beginPath();
                 wctx.arc(p.x, p.y, p.r, 0, 6.2832);
-                wctx.stroke();
-                wctx.strokeStyle = 'rgba(45,82,96,' + (p.a * 0.25).toFixed(3) + ')';
-                wctx.beginPath();
-                wctx.arc(p.x, p.y, p.r * 0.82, 0, 6.2832);
-                wctx.stroke();
+                wctx.fill();
             }
+            wctx.globalCompositeOperation = 'source-over';
             requestAnimationFrame(waterLoop);
         })();
     }
