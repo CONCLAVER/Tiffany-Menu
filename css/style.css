@@ -296,6 +296,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     box-shadow: 0 6px 20px -12px rgba(0,0,0,.12);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    transition: transform .3s ease;
+}
+.filters.filters--hidden {
+    transform: translateY(calc(-100% - 80px));
 }
 .filter-btn {
     padding: 8px 18px;

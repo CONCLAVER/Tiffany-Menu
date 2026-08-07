@@ -37,6 +37,42 @@
 
     window.addEventListener('scroll', handleNavScroll, { passive: true });
 
+    // --- Filter bars: hide on scroll down, reveal on short scroll up ---
+    var filterBars = document.querySelectorAll('.filters');
+    var lastFilterY = window.pageYOffset;
+    var filterAcc = 0;
+    var NAV_H = 76;
+
+    function handleFiltersScroll() {
+        var y = window.pageYOffset;
+        var dy = y - lastFilterY;
+        lastFilterY = y;
+        if (Math.abs(dy) < 4) return;
+        filterAcc += dy;
+
+        if (filterAcc > 30) {
+            filterBars.forEach(function (bar) {
+                if (bar.getBoundingClientRect().top <= NAV_H + 1) {
+                    bar.classList.add('filters--hidden');
+                }
+            });
+            filterAcc = 0;
+        } else if (filterAcc < -10) {
+            filterBars.forEach(function (bar) {
+                bar.classList.remove('filters--hidden');
+            });
+            filterAcc = 0;
+        }
+
+        filterBars.forEach(function (bar) {
+            if (bar.getBoundingClientRect().top > NAV_H + 1) {
+                bar.classList.remove('filters--hidden');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleFiltersScroll, { passive: true });
+
     // --- Filter functionality ---
     document.querySelectorAll('.filters').forEach(function (filterBar) {
         var section = filterBar.dataset.section;
