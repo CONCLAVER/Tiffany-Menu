@@ -133,63 +133,6 @@
     style.textContent = '@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
     document.head.appendChild(style);
 
-    // --- Water surface: ripples follow the mouse ---
-    var waterCanvas = document.querySelector('.hero__water');
-
-    if (waterCanvas && hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        var wctx = waterCanvas.getContext('2d');
-        var ripples = [];
-        var lastRX = 0, lastRY = 0;
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-        function sizeWater() {
-            var r = hero.getBoundingClientRect();
-            waterCanvas.width = Math.round(r.width * dpr);
-            waterCanvas.height = Math.round(r.height * dpr);
-        }
-        sizeWater();
-        window.addEventListener('resize', sizeWater);
-
-        hero.addEventListener('pointermove', function (e) {
-            var r = hero.getBoundingClientRect();
-            var x = (e.clientX - r.left) * dpr;
-            var y = (e.clientY - r.top) * dpr;
-            if (Math.hypot(x - lastRX, y - lastRY) > 18 * dpr) {
-                lastRX = x;
-                lastRY = y;
-                ripples.push({
-                    x: x,
-                    y: y,
-                    r: (70 + Math.random() * 30) * dpr,
-                    a: 0.28,
-                    decay: 0.006 + Math.random() * 0.004
-                });
-                if (ripples.length > 30) ripples.shift();
-            }
-        });
-
-        (function waterLoop() {
-            wctx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
-            wctx.globalCompositeOperation = 'lighter';
-            for (var i = ripples.length - 1; i >= 0; i--) {
-                var p = ripples[i];
-                p.r += 0.35 * dpr;
-                p.a -= p.decay;
-                if (p.a <= 0) { ripples.splice(i, 1); continue; }
-                var g = wctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-                g.addColorStop(0, 'rgba(255,252,244,' + p.a.toFixed(3) + ')');
-                g.addColorStop(0.55, 'rgba(255,252,244,' + (p.a * 0.45).toFixed(3) + ')');
-                g.addColorStop(1, 'rgba(255,252,244,0)');
-                wctx.fillStyle = g;
-                wctx.beginPath();
-                wctx.arc(p.x, p.y, p.r, 0, 6.2832);
-                wctx.fill();
-            }
-            wctx.globalCompositeOperation = 'source-over';
-            requestAnimationFrame(waterLoop);
-        })();
-    }
-
     // --- Floating logo card: 3D tilt follows the mouse ---
     var logoCard = document.querySelector('.hero__logo-card');
     var hero = document.getElementById('hero');
