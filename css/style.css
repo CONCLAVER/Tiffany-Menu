@@ -416,6 +416,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     font-size: 16px;
 }
 
+/* Vector flags */
+.flag {
+    width: 21px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: -2px;
+    margin-left: 6px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.12);
+}
+
 /* Tea list: 2-column layout */
 .tea-list {
     list-style: none;
