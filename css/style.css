@@ -105,6 +105,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     box-sizing: border-box;
     transform-style: preserve-3d;
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 .logo-tiffany {
     display: block;
@@ -113,7 +115,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     height: auto;
     margin: 0 auto;
     user-select: none;
-    transform: translateZ(38px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 .hero__title,
 .hero__subtitle { display: none; }
