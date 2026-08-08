@@ -568,22 +568,69 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #007aff;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    font-style: italic;
+    border: 1.5px solid var(--food-text-muted);
+    background: transparent;
+    color: var(--food-text-muted);
     cursor: help;
-    margin-right: 6px;
+    margin-left: 6px;
     vertical-align: middle;
     position: relative;
+    transition: border-color var(--transition), color var(--transition);
+}
+
+.info-icon svg {
+    width: 12px;
+    height: 12px;
+}
+
+.info-icon:hover {
+    border-color: var(--food-accent);
+    color: var(--food-accent);
 }
 
 .menu-section--bar .info-icon {
-    background: var(--bar-accent);
+    border-color: var(--bar-border);
+    color: var(--bar-text-muted);
+}
+
+.menu-section--bar .info-icon:hover {
+    border-color: var(--bar-text);
+    color: var(--bar-text);
+}
+
+/* Info Tooltip */
+.info-tooltip {
+    position: fixed;
+    background: var(--food-card-bg);
+    color: var(--food-text);
+    border: 1px solid var(--food-border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 280px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    transition: opacity .25s ease, transform .25s ease;
+    pointer-events: none;
+    z-index: 1000;
+    font-family: var(--font-body);
+}
+
+.info-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.menu-section--bar .info-tooltip {
+    background: var(--bar-bg);
+    color: var(--bar-text);
+    border-color: var(--bar-border);
+    box-shadow: 0 8px 32px rgba(0,0,0,.25);
 }
 
 /* Special item */

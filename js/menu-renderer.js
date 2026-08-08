@@ -81,7 +81,7 @@
         if (item.badge === 'new') badgeHtml = '<span class="badge badge--new">NEW</span> ';
         if (item.badge === 'top') badgeHtml = '<span class="badge badge--top">TOP</span> ';
 
-        var infoIcon = item.info ? '<span class="info-icon" title="' + escapeHtml(item.info) + '">i</span> ' : '';
+        var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>' : '';
 
         var descHtml = item.desc ? '<p class="menu-item__desc">' + escapeHtml(item.desc) + '</p>' : '';
 
@@ -91,7 +91,7 @@
 
         return '<div class="' + classes + '">' +
             '<div class="menu-item__header">' +
-                '<span class="menu-item__name">' + infoIcon + badgeHtml + escapeHtml(item.name) + '</span>' +
+                '<span class="menu-item__name">' + badgeHtml + escapeHtml(item.name) + infoIcon + '</span>' +
                 priceHtml +
             '</div>' +
             descHtml +
@@ -164,12 +164,41 @@
                 window.__menuData = data;
                 renderSection('food', 'food-grid');
                 renderSection('bar', 'bar-grid');
+                initInfoTooltips();
 
                 if (window.__menuReady) window.__menuReady();
             })
             .catch(function (err) {
                 showError('Не удалось загрузить меню: ' + err.message);
             });
+    }
+
+    function initInfoTooltips() {
+        var tooltip = document.createElement('div');
+        tooltip.className = 'info-tooltip';
+        document.body.appendChild(tooltip);
+
+        document.querySelectorAll('.info-icon').forEach(function (icon) {
+            icon.addEventListener('mouseenter', function () {
+                var text = this.getAttribute('data-info');
+                if (!text) return;
+                tooltip.textContent = text;
+                var rect = this.getBoundingClientRect();
+                var top = rect.bottom + 8;
+                var left = rect.left + rect.width / 2;
+                tooltip.style.top = top + 'px';
+                tooltip.style.left = left + 'px';
+                tooltip.style.transform = 'translateX(-50%) translateY(6px) scale(0.96)';
+                requestAnimationFrame(function () {
+                    tooltip.classList.add('visible');
+                    tooltip.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+                });
+            });
+
+            icon.addEventListener('mouseleave', function () {
+                tooltip.classList.remove('visible');
+            });
+        });
     }
 
     if (document.readyState === 'loading') {

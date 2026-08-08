@@ -241,12 +241,12 @@
         if (item.badge === 'new') badgeHtml = '<span class="badge badge-new">NEW</span>';
         if (item.badge === 'top') badgeHtml = '<span class="badge badge-top">TOP</span>';
 
-        var infoIcon = item.info ? '<span class="info-icon" title="' + escapeHtml(item.info) + '">i</span>' : '';
+        var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>' : '';
 
         var subAttr = subIndex !== undefined ? ' data-sub="' + subIndex + '"' : '';
 
         return '<div class="item-row">' +
-            '<div class="item-name">' + infoIcon + badgeHtml + escapeHtml(item.name) + '</div>' +
+            '<div class="item-name">' + badgeHtml + escapeHtml(item.name) + infoIcon + '</div>' +
             '<div class="item-price">' + escapeHtml(item.price || '') + '</div>' +
             '<div class="item-weight">' + escapeHtml(item.weight || '') + '</div>' +
             '<div class="item-actions">' +
@@ -309,7 +309,6 @@
             document.getElementById('itemInfo').value = item.info || '';
             document.getElementById('badgeNew').checked = item.badge === 'new';
             document.getElementById('badgeTop').checked = item.badge === 'top';
-            document.getElementById('itemSpecial').checked = item.special === true;
         } else {
             title.textContent = 'Новая позиция';
             document.getElementById('editForm').reset();
@@ -340,8 +339,6 @@
         if (document.getElementById('badgeNew').checked) badge = 'new';
         if (document.getElementById('badgeTop').checked) badge = 'top';
         if (badge) item.badge = badge;
-
-        if (document.getElementById('itemSpecial').checked) item.special = true;
 
         // Remove empty fields
         Object.keys(item).forEach(function (key) {
