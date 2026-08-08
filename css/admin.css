@@ -236,6 +236,15 @@ body {
     gap: 6px;
 }
 
+.btn svg {
+    flex-shrink: 0;
+}
+
+.header-logo {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
 .btn-primary {
     background: var(--primary);
     color: #fff;
@@ -252,6 +261,15 @@ body {
 
 .btn-secondary:hover {
     background: #d1d1d6;
+}
+
+.btn-secondary.token-active {
+    background: var(--success);
+    color: #fff;
+}
+
+.btn-secondary.token-active:hover {
+    background: #28a745;
 }
 
 .btn-danger {
@@ -519,6 +537,10 @@ body {
     transition: all var(--transition);
 }
 
+.btn-icon svg {
+    flex-shrink: 0;
+}
+
 .btn-icon:hover {
     background: var(--secondary);
 }
@@ -540,6 +562,14 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn-small svg {
+    flex-shrink: 0;
 }
 
 .btn-edit {

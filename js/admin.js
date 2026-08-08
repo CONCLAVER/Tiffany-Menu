@@ -113,11 +113,14 @@
 
     function updateTokenButton() {
         var btn = document.getElementById('tokenBtn');
+        var text = document.getElementById('tokenBtnText');
         if (githubToken) {
-            btn.textContent = '🔑 ✓';
+            btn.classList.add('token-active');
+            if (text) text.textContent = 'Token ✓';
             btn.title = 'Token настроен';
         } else {
-            btn.textContent = '🔑 Token';
+            btn.classList.remove('token-active');
+            if (text) text.textContent = 'Token';
             btn.title = 'Настроить GitHub Token';
         }
     }
@@ -225,7 +228,7 @@
                     noteHtml +
                 '</div>' +
                 '<div class="category-actions">' +
-                    '<button class="btn-icon add" onclick="addItem(' + catIndex + ')" title="Добавить позицию">+</button>' +
+                    '<button class="btn-icon add" onclick="addItem(' + catIndex + ')" title="Добавить позицию"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>' +
                 '</div>' +
             '</div>' +
             '<div class="item-list">' + itemsHtml + '</div>' +
@@ -246,8 +249,8 @@
             '<div class="item-price">' + escapeHtml(item.price || '') + '</div>' +
             '<div class="item-weight">' + escapeHtml(item.weight || '') + '</div>' +
             '<div class="item-actions">' +
-                '<button class="btn-small btn-edit" onclick="editItem(' + catIndex + ',' + itemIndex + subAttr + ')">✏️</button>' +
-                '<button class="btn-small btn-delete" onclick="deleteItem(' + catIndex + ',' + itemIndex + subAttr + ')">🗑️</button>' +
+                '<button class="btn-small btn-edit" onclick="editItem(' + catIndex + ',' + itemIndex + subAttr + ')" title="Редактировать"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>' +
+                '<button class="btn-small btn-delete" onclick="deleteItem(' + catIndex + ',' + itemIndex + subAttr + ')" title="Удалить"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>' +
             '</div>' +
         '</div>';
     }

@@ -66,14 +66,22 @@
         <!-- Header -->
         <header class="admin-header">
             <div class="header-left">
-                <h1>🍽️ Tiffany Menu</h1>
+                <svg class="header-logo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+                <h1>Tiffany Menu</h1>
                 <span class="header-subtitle">Админ-панель</span>
             </div>
             <div class="header-actions">
-                <button class="btn btn-secondary" onclick="location.href='index.html'">👁️ Просмотр</button>
-                <button class="btn btn-secondary" id="tokenBtn" onclick="showTokenSetup()">🔑 Token</button>
+                <button class="btn btn-secondary" onclick="location.href='index.html'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Просмотр
+                </button>
+                <button class="btn btn-secondary" id="tokenBtn" onclick="showTokenSetup()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                    <span id="tokenBtnText">Token</span>
+                </button>
                 <button class="btn btn-primary" id="saveBtn" onclick="saveAllChanges()">
-                    <span id="saveBtnText">💾 Сохранить</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span id="saveBtnText">Сохранить</span>
                 </button>
                 <button class="btn btn-text" onclick="logout()">Выйти</button>
             </div>
@@ -82,10 +90,12 @@
         <!-- Section Tabs -->
         <div class="section-tabs">
             <button class="tab active" data-section="food" onclick="switchSection('food')">
-                🍴 Меню <span class="tab-count" id="foodCount">0</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+                Меню <span class="tab-count" id="foodCount">0</span>
             </button>
             <button class="tab" data-section="bar" onclick="switchSection('bar')">
-                🍸 Барная карта <span class="tab-count" id="barCount">0</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M19 3H5l7 8 7-8z"/></svg>
+                Барная карта <span class="tab-count" id="barCount">0</span>
             </button>
         </div>
 
