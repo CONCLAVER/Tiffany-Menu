@@ -633,18 +633,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     box-shadow: 0 8px 32px rgba(0,0,0,.25);
 }
 
-/* Special item */
-.menu-item--special {
-    background: rgba(201,168,76,.08);
-    border-radius: var(--radius-sm);
-    padding: 16px;
-    border-bottom: none !important;
-    margin-top: 8px;
-}
-.menu-section--bar .menu-item--special {
-    background: rgba(255,255,255,.1);
-}
-
 /* ========================================
    FOOTER
    ======================================== */

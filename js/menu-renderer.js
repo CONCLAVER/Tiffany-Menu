@@ -75,7 +75,6 @@
     function renderItem(item) {
         var classes = 'menu-item';
         if (item.badge) classes += ' menu-item--new';
-        if (item.special) classes += ' menu-item--special';
 
         var badgeHtml = '';
         if (item.badge === 'new') badgeHtml = '<span class="badge badge--new">NEW</span> ';
