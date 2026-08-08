@@ -568,36 +568,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1.5px solid var(--food-text-muted);
-    background: transparent;
+    width: 18px;
+    height: 18px;
     color: var(--food-text-muted);
     cursor: help;
     margin-left: 6px;
     vertical-align: middle;
     position: relative;
-    transition: border-color var(--transition), color var(--transition);
+    transition: color var(--transition);
 }
 
 .info-icon svg {
-    width: 12px;
-    height: 12px;
+    width: 100%;
+    height: 100%;
 }
 
 .info-icon:hover {
-    border-color: var(--food-accent);
     color: var(--food-accent);
 }
 
 .menu-section--bar .info-icon {
-    border-color: var(--bar-border);
     color: var(--bar-text-muted);
 }
 
 .menu-section--bar .info-icon:hover {
-    border-color: var(--bar-text);
     color: var(--bar-text);
 }
 

@@ -80,7 +80,7 @@
         if (item.badge === 'new') badgeHtml = '<span class="badge badge--new">NEW</span> ';
         if (item.badge === 'top') badgeHtml = '<span class="badge badge--top">TOP</span> ';
 
-        var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>' : '';
+        var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8A42 42 0 0 0 8 50a42 42 0 0 0 42 42h42V50A42 42 0 0 0 50 8Z"/><circle cx="50" cy="35" r="6" fill="currentColor" stroke="none"/><path d="M42 50h8v24"/></svg></span>' : '';
 
         var descHtml = item.desc ? '<p class="menu-item__desc">' + escapeHtml(item.desc) + '</p>' : '';
 
