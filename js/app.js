@@ -1,7 +1,3 @@
-/* ========================================
-   TIFFANY FOOD & DRINK — APP JS
-   ======================================== */
-
 (function () {
     'use strict';
 
@@ -11,7 +7,7 @@
             e.preventDefault();
             var target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                var offset = 60; // nav height
+                var offset = 60;
                 var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
                 window.scrollTo({ top: top, behavior: 'smooth' });
             }
@@ -21,7 +17,6 @@
     // --- Sticky nav visibility ---
     var nav = document.getElementById('nav');
     var hero = document.getElementById('hero');
-    var lastScroll = 0;
 
     function handleNavScroll() {
         var scrollY = window.pageYOffset;
@@ -32,12 +27,11 @@
         } else {
             nav.classList.remove('visible');
         }
-        lastScroll = scrollY;
     }
 
     window.addEventListener('scroll', handleNavScroll, { passive: true });
 
-    // --- Filter bars: hide on scroll down, reveal on short scroll up ---
+    // --- Filter bars: hide on scroll down, reveal on scroll up ---
     var filterBars = document.querySelectorAll('.filters');
     var lastFilterY = window.pageYOffset;
     var filterAcc = 0;
@@ -73,43 +67,45 @@
 
     window.addEventListener('scroll', handleFiltersScroll, { passive: true });
 
-    // --- Filter functionality ---
-    document.querySelectorAll('.filters').forEach(function (filterBar) {
-        var section = filterBar.dataset.section;
-        var grid = section === 'food'
-            ? document.getElementById('food-grid')
-            : document.getElementById('bar-grid');
-        var categories = grid.querySelectorAll('.menu-category');
-        var buttons = filterBar.querySelectorAll('.filter-btn');
+    // --- Filter functionality (called after menu renders) ---
+    function initFilters() {
+        document.querySelectorAll('.filters').forEach(function (filterBar) {
+            var section = filterBar.dataset.section;
+            var grid = section === 'food'
+                ? document.getElementById('food-grid')
+                : document.getElementById('bar-grid');
+            if (!grid) return;
 
-        buttons.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                // Update active button
-                buttons.forEach(function (b) { b.classList.remove('active'); });
-                btn.classList.add('active');
+            var categories = grid.querySelectorAll('.menu-category');
+            var buttons = filterBar.querySelectorAll('.filter-btn');
 
-                var filter = btn.dataset.filter;
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    buttons.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
 
-                categories.forEach(function (cat) {
-                    if (filter === 'all' || cat.dataset.category === filter) {
-                        cat.classList.remove('hidden');
-                        cat.style.animation = 'fadeIn .4s ease forwards';
-                    } else {
-                        cat.classList.add('hidden');
-                        cat.style.animation = '';
+                    var filter = btn.dataset.filter;
+
+                    categories.forEach(function (cat) {
+                        if (filter === 'all' || cat.dataset.category === filter) {
+                            cat.classList.remove('hidden');
+                            cat.style.animation = 'fadeIn .4s ease forwards';
+                        } else {
+                            cat.classList.add('hidden');
+                            cat.style.animation = '';
+                        }
+                    });
+
+                    var sectionEl = filterBar.closest('.menu-section');
+                    if (sectionEl) {
+                        var navH = 76;
+                        var sTop = sectionEl.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({ top: Math.max(0, sTop - navH), behavior: 'smooth' });
                     }
                 });
-
-                // Always scroll to show the section title after filtering
-                var sectionEl = filterBar.closest('.menu-section');
-                if (sectionEl) {
-                    var navH = 76;
-                    var sTop = sectionEl.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({ top: Math.max(0, sTop - navH), behavior: 'smooth' });
-                }
             });
         });
-    });
+    }
 
     // --- Back to top button ---
     var backToTop = document.getElementById('backToTop');
@@ -128,21 +124,21 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // --- Fade-in animation keyframes (injected) ---
+    // --- Fade-in animation keyframes ---
     var style = document.createElement('style');
     style.textContent = '@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
     document.head.appendChild(style);
 
     // --- Floating logo card: 3D tilt follows the mouse ---
     var logoCard = document.querySelector('.hero__logo-card');
-    var hero = document.getElementById('hero');
+    var heroSection = document.getElementById('hero');
 
-    if (logoCard && hero && window.matchMedia('(pointer: fine)').matches) {
+    if (logoCard && heroSection && window.matchMedia('(pointer: fine)').matches) {
         var targetRX = 0, targetRY = 0, targetTX = 0, targetTY = 0;
         var curRX = 0, curRY = 0, curTX = 0, curTY = 0;
 
-        hero.addEventListener('mousemove', function (e) {
-            var r = hero.getBoundingClientRect();
+        heroSection.addEventListener('mousemove', function (e) {
+            var r = heroSection.getBoundingClientRect();
             var px = (e.clientX - r.left) / r.width - 0.5;
             var py = (e.clientY - r.top) / r.height - 0.5;
             targetRY = px * 12;
@@ -151,7 +147,7 @@
             targetTY = py * 9;
         });
 
-        hero.addEventListener('mouseleave', function () {
+        heroSection.addEventListener('mouseleave', function () {
             targetRX = 0;
             targetRY = 0;
             targetTX = 0;
@@ -171,5 +167,8 @@
             requestAnimationFrame(floatLoop);
         })();
     }
+
+    // --- Expose callback for menu-renderer ---
+    window.__menuReady = initFilters;
 
 })();

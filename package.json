@@ -1,0 +1,14 @@
+{
+  "name": "tiffany-menu",
+  "version": "1.0.0",
+  "description": "Tiffany Food & Drink — веб-меню ресторана",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve .",
+    "build": "echo 'Static site — no build required'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["restaurant", "menu", "landing"],
+  "license": "UNLICENSED"
+}
