@@ -563,6 +563,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     color: var(--bar-bg);
 }
 
+/* Info Icon */
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #007aff;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    font-style: italic;
+    cursor: help;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+}
+
+.menu-section--bar .info-icon {
+    background: var(--bar-accent);
+}
+
 /* Special item */
 .menu-item--special {
     background: rgba(201,168,76,.08);

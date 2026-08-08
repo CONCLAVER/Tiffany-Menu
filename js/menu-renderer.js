@@ -81,6 +81,8 @@
         if (item.badge === 'new') badgeHtml = '<span class="badge badge--new">NEW</span> ';
         if (item.badge === 'top') badgeHtml = '<span class="badge badge--top">TOP</span> ';
 
+        var infoIcon = item.info ? '<span class="info-icon" title="' + escapeHtml(item.info) + '">i</span> ' : '';
+
         var descHtml = item.desc ? '<p class="menu-item__desc">' + escapeHtml(item.desc) + '</p>' : '';
 
         var priceHtml = item.price ? '<span class="menu-item__price">' + escapeHtml(item.price) + '</span>' : '';
@@ -89,7 +91,7 @@
 
         return '<div class="' + classes + '">' +
             '<div class="menu-item__header">' +
-                '<span class="menu-item__name">' + badgeHtml + escapeHtml(item.name) + '</span>' +
+                '<span class="menu-item__name">' + infoIcon + badgeHtml + escapeHtml(item.name) + '</span>' +
                 priceHtml +
             '</div>' +
             descHtml +
