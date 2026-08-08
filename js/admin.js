@@ -4,7 +4,7 @@
     // Configuration
     var CONFIG = {
         login: 'tiffany-menu',
-        password: 'ttiffanyadmin',
+        password: 'tiffanyadmin',
         repo: 'CONCLAVER/Tiffany-Menu',
         branch: 'main',
         filePath: 'data/menu.json',
