@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiffany Menu — Админ-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Tiffany Menu</h1>
+                <p>Админ-панель</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginInput">Логин</label>
+                    <input type="text" id="loginInput" placeholder="tiffany-menu" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Пароль</label>
+                    <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <div class="login-error" id="loginError">Неверный логин или пароль</div>
+                <button type="submit" class="btn btn-primary btn-full">Войти</button>
+            </form>
+            <div class="login-footer">
+                <a href="index.html">← Вернуться на сайт</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Token Setup -->
+    <div class="token-overlay" id="tokenOverlay" style="display: none;">
+        <div class="token-box">
+            <h2>Настройка GitHub API</h2>
+            <p>Для сохранения изменений нужен Personal Access Token от GitHub.</p>
+            <div class="token-instructions">
+                <ol>
+                    <li>Откройте <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a></li>
+                    <li>Нажмите "Generate new token (classic)"</li>
+                    <li>Note: <code>Tiffany Menu Admin</code></li>
+                    <li>Отметьте: <strong>repo</strong></li>
+                    <li>Скопируйте токен</li>
+                </ol>
+            </div>
+            <div class="form-group">
+                <label for="tokenInput">GitHub Token</label>
+                <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+            </div>
+            <div class="token-error" id="tokenError"></div>
+            <div class="token-actions">
+                <button class="btn btn-secondary" onclick="cancelTokenSetup()">Отмена</button>
+                <button class="btn btn-primary" onclick="saveToken()">Сохранить токен</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>🍽️ Tiffany Menu</h1>
+                <span class="header-subtitle">Админ-панель</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="location.href='index.html'">👁️ Просмотр</button>
+                <button class="btn btn-secondary" id="tokenBtn" onclick="showTokenSetup()">🔑 Token</button>
+                <button class="btn btn-primary" id="saveBtn" onclick="saveAllChanges()">
+                    <span id="saveBtnText">💾 Сохранить</span>
+                </button>
+                <button class="btn btn-text" onclick="logout()">Выйти</button>
+            </div>
+        </header>
+
+        <!-- Section Tabs -->
+        <div class="section-tabs">
+            <button class="tab active" data-section="food" onclick="switchSection('food')">
+                🍴 Меню <span class="tab-count" id="foodCount">0</span>
+            </button>
+            <button class="tab" data-section="bar" onclick="switchSection('bar')">
+                🍸 Барная карта <span class="tab-count" id="barCount">0</span>
+            </button>
+        </div>
+
+        <!-- Categories Container -->
+        <div class="categories-container" id="categoriesContainer">
+            <!-- Categories will be rendered here -->
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Загрузка меню...</p>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Редактирование позиции</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="editForm" onsubmit="saveItem(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group flex-grow">
+                            <label for="itemName">Название *</label>
+                            <input type="text" id="itemName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemPrice">Цена</label>
+                            <input type="text" id="itemPrice" placeholder="490 ₽">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemWeight">Вес / Объём</label>
+                            <input type="text" id="itemWeight" placeholder="100 г">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDesc">Описание</label>
+                        <textarea id="itemDesc" rows="2" placeholder="Краткое описание блюда"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemInfo">Доп. информация (иконка "i")</label>
+                        <textarea id="itemInfo" rows="2" placeholder="Подробная информация для иконки i"></textarea>
+                        <small class="form-hint">Отображается при наведении на иконку ⓘ рядом с названием</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Метки</label>
+                        <div class="badge-group">
+                            <label class="badge-option">
+                                <input type="checkbox" id="badgeNew">
+                                <span class="badge badge-new">NEW</span>
+                            </label>
+                            <label class="badge-option">
+                                <input type="checkbox" id="badgeTop">
+                                <span class="badge badge-top">TOP</span>
+                            </label>
+                            <label class="badge-option">
+                                <input type="checkbox" id="itemSpecial">
+                                <span>Специальная позиция</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal" style="display: none;">
+        <div class="modal modal-small">
+            <div class="modal-header">
+                <h2>Удалить позицию?</h2>
+                <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить <strong id="deleteItemName"></strong>?</p>
+                <p class="text-muted">Это действие нельзя отменить.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Отмена</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" style="display: none;">
+        <div class="toast-content">
+            <span class="toast-icon" id="toastIcon">✓</span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
