@@ -152,7 +152,8 @@
         })
         .then(function (data) {
             fileSha = data.sha;
-            var content = atob(data.content);
+            var bytes = Uint8Array.from(atob(data.content), function (c) { return c.charCodeAt(0); });
+            var content = new TextDecoder('utf-8').decode(bytes);
             menuData = JSON.parse(content);
             renderCategories();
             loading.style.display = 'none';
