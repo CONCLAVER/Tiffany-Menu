@@ -207,6 +207,7 @@
         var noteHtml = '';
         if (cat.note) noteHtml = '<div class="category-note">' + cat.note + '</div>';
         if (cat.noteBar) noteHtml = '<div class="category-note">' + cat.noteBar + '</div>';
+        var flagHtml = cat.flag ? '<svg class="flag-inline" viewBox="0 0 30 20"><use href="#flag-' + cat.flag + '"></use></svg>' : '';
 
         var itemsHtml = '';
         if (cat.subheadings) {
@@ -225,7 +226,7 @@
         return '<div class="category-card">' +
             '<div class="category-header">' +
                 '<div>' +
-                    '<h2 class="category-title">' + cat.title + '</h2>' +
+                    '<h2 class="category-title">' + flagHtml + ' ' + cat.title + '</h2>' +
                     noteHtml +
                 '</div>' +
                 '<div class="category-actions">' +
@@ -242,11 +243,12 @@
         if (item.badge === 'top') badgeHtml = '<span class="badge badge-top">TOP</span>';
 
         var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8A42 42 0 0 0 8 50a42 42 0 0 0 42 42h42V50A42 42 0 0 0 50 8Z"/><circle cx="50" cy="35" r="6" fill="currentColor" stroke="none"/><path d="M42 50h8v24"/></svg></span>' : '';
+        var flagHtml = item.flag ? '<svg class="flag-inline" viewBox="0 0 30 20"><use href="#flag-' + item.flag + '"></use></svg>' : '';
 
         var subAttr = subIndex !== undefined ? ' data-sub="' + subIndex + '"' : '';
 
         return '<div class="item-row">' +
-            '<div class="item-name">' + badgeHtml + escapeHtml(item.name) + infoIcon + '</div>' +
+            '<div class="item-name">' + badgeHtml + escapeHtml(item.name) + flagHtml + infoIcon + '</div>' +
             '<div class="item-price">' + escapeHtml(item.price || '') + '</div>' +
             '<div class="item-weight">' + escapeHtml(item.weight || '') + '</div>' +
             '<div class="item-actions">' +
@@ -309,9 +311,27 @@
             document.getElementById('itemInfo').value = item.info || '';
             document.getElementById('badgeNew').checked = item.badge === 'new';
             document.getElementById('badgeTop').checked = item.badge === 'top';
+
+            // Flag selector — only for bar section
+            var flagGroup = document.getElementById('flagGroup');
+            if (currentSection === 'bar') {
+                flagGroup.style.display = 'block';
+                document.querySelectorAll('input[name="itemFlag"]').forEach(function (r) {
+                    r.checked = r.value === (item.flag || '');
+                });
+            } else {
+                flagGroup.style.display = 'none';
+            }
         } else {
             title.textContent = 'Новая позиция';
             document.getElementById('editForm').reset();
+            var flagGroup = document.getElementById('flagGroup');
+            if (currentSection === 'bar') {
+                flagGroup.style.display = 'block';
+                document.querySelectorAll('input[name="itemFlag"]').forEach(function (r) { r.checked = false; });
+            } else {
+                flagGroup.style.display = 'none';
+            }
         }
 
         modal.style.display = 'flex';
@@ -334,6 +354,12 @@
             desc: document.getElementById('itemDesc').value.trim(),
             info: document.getElementById('itemInfo').value.trim()
         };
+
+        // Flag (bar section only)
+        if (currentSection === 'bar') {
+            var flagRadio = document.querySelector('input[name="itemFlag"]:checked');
+            if (flagRadio) item.flag = flagRadio.value;
+        }
 
         var badge = null;
         if (document.getElementById('badgeNew').checked) badge = 'new';

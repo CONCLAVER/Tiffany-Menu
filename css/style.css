@@ -595,6 +595,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     color: var(--bar-text);
 }
 
+/* Inline Flag */
+.flag-inline {
+    width: 21px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: -2px;
+    margin-left: 6px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.12);
+}
+
 /* Info Tooltip */
 .info-tooltip {
     position: fixed;

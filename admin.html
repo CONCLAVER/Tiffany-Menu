@@ -159,6 +159,31 @@
                             </label>
                         </div>
                     </div>
+                    <div class="form-group" id="flagGroup" style="display:none;">
+                        <label>Страна-поставщик</label>
+                        <div class="flag-selector">
+                            <label class="flag-option">
+                                <input type="radio" name="itemFlag" value="ru">
+                                <svg class="flag-svg" viewBox="0 0 30 20"><use href="#flag-ru"></use></svg>
+                            </label>
+                            <label class="flag-option">
+                                <input type="radio" name="itemFlag" value="fr">
+                                <svg class="flag-svg" viewBox="0 0 30 20"><use href="#flag-fr"></use></svg>
+                            </label>
+                            <label class="flag-option">
+                                <input type="radio" name="itemFlag" value="it">
+                                <svg class="flag-svg" viewBox="0 0 30 20"><use href="#flag-it"></use></svg>
+                            </label>
+                            <label class="flag-option">
+                                <input type="radio" name="itemFlag" value="es">
+                                <svg class="flag-svg" viewBox="0 0 30 20"><use href="#flag-es"></use></svg>
+                            </label>
+                            <label class="flag-option">
+                                <input type="radio" name="itemFlag" value="cl">
+                                <svg class="flag-svg" viewBox="0 0 30 20"><use href="#flag-cl"></use></svg>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Отмена</button>
@@ -195,5 +220,34 @@
     </div>
 
     <script src="js/admin.js"></script>
+
+    <!-- Flag Sprite -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+        <symbol id="flag-ru" viewBox="0 0 30 20">
+            <rect width="30" height="20" fill="#ffffff"/>
+            <rect y="6.7" width="30" height="6.7" fill="#0039a6"/>
+            <rect y="13.3" width="30" height="6.7" fill="#d52b1e"/>
+        </symbol>
+        <symbol id="flag-fr" viewBox="0 0 30 20">
+            <rect width="10" height="20" fill="#002395"/>
+            <rect x="10" width="10" height="20" fill="#ffffff"/>
+            <rect x="20" width="10" height="20" fill="#ed2939"/>
+        </symbol>
+        <symbol id="flag-it" viewBox="0 0 30 20">
+            <rect width="10" height="20" fill="#009246"/>
+            <rect x="10" width="10" height="20" fill="#ffffff"/>
+            <rect x="20" width="10" height="20" fill="#ce2b37"/>
+        </symbol>
+        <symbol id="flag-es" viewBox="0 0 30 20">
+            <rect width="30" height="20" fill="#aa151b"/>
+            <rect y="5" width="30" height="10" fill="#f1bf00"/>
+        </symbol>
+        <symbol id="flag-cl" viewBox="0 0 30 20">
+            <rect width="30" height="20" fill="#ffffff"/>
+            <rect y="10" width="30" height="10" fill="#d52b1e"/>
+            <rect width="10" height="10" fill="#0039a6"/>
+            <path d="M5 2 L5.71 4.03 L7.85 4.07 L6.14 5.37 L6.76 7.43 L5 6.2 L3.24 7.43 L3.86 5.37 L2.15 4.07 L4.29 4.03 Z" fill="#ffffff"/>
+        </symbol>
+    </svg>
 </body>
 </html>

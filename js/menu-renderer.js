@@ -81,6 +81,7 @@
         if (item.badge === 'top') badgeHtml = '<span class="badge badge--top">TOP</span> ';
 
         var infoIcon = item.info ? '<span class="info-icon" data-info="' + escapeHtml(item.info) + '"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8A42 42 0 0 0 8 50a42 42 0 0 0 42 42h42V50A42 42 0 0 0 50 8Z"/><circle cx="50" cy="35" r="6" fill="currentColor" stroke="none"/><path d="M42 50h8v24"/></svg></span>' : '';
+        var flagHtml = item.flag ? '<svg class="flag-inline" viewBox="0 0 30 20"><use href="#flag-' + item.flag + '"></use></svg>' : '';
 
         var descHtml = item.desc ? '<p class="menu-item__desc">' + escapeHtml(item.desc) + '</p>' : '';
 
@@ -90,7 +91,7 @@
 
         return '<div class="' + classes + '">' +
             '<div class="menu-item__header">' +
-                '<span class="menu-item__name">' + badgeHtml + escapeHtml(item.name) + infoIcon + '</span>' +
+                '<span class="menu-item__name">' + badgeHtml + escapeHtml(item.name) + flagHtml + infoIcon + '</span>' +
                 priceHtml +
             '</div>' +
             descHtml +
@@ -106,6 +107,7 @@
         if (cat.noteBar) {
             noteHtml = '<div class="category-note-bar">' + cat.noteBar + '</div>';
         }
+        var flagHtml = cat.flag ? '<svg class="flag-inline" viewBox="0 0 30 20"><use href="#flag-' + cat.flag + '"></use></svg>' : '';
 
         var itemsHtml = '';
 
@@ -127,7 +129,7 @@
         }
 
         return '<div class="menu-category" data-category="' + cat.id + '">' +
-            '<h3 class="category-title">' + cat.title + '</h3>' +
+            '<h3 class="category-title">' + flagHtml + ' ' + cat.title + '</h3>' +
             noteHtml +
             itemsHtml +
         '</div>';
@@ -148,7 +150,7 @@
     }
 
     function init() {
-        fetch('data/menu.json')
+        fetch('data/menu.json?t=' + Date.now())
             .then(function (r) {
                 if (!r.ok) throw new Error('HTTP ' + r.status + ': ' + r.statusText);
                 return r.json();

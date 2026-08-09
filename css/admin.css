@@ -522,6 +522,59 @@ body {
     padding: 10px 0;
 }
 
+/* Flag Selector */
+.flag-selector {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.flag-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.flag-option:hover {
+    background: var(--bg);
+}
+
+.flag-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.flag-option input:checked + .flag-svg,
+.flag-option:has(input:checked) {
+    border-color: var(--primary);
+    background: rgba(239, 118, 75, 0.1);
+}
+
+.flag-svg {
+    width: 30px;
+    height: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.12);
+}
+
+/* Inline Flag (in category title / item name) */
+.flag-inline {
+    width: 21px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: -2px;
+    margin-left: 6px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.12);
+}
+
 /* Button Icons */
 .btn-icon {
     width: 36px;

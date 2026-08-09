@@ -575,7 +575,8 @@
       {
         "id": "sparkling-wine",
         "title": "Игристые вина",
-        "note": "В нашем баре, почти все вина – отечественные <svg class=\"flag\"><use href=\"#flag-ru\"></use></svg>",
+        "note": "В нашем баре, почти все вина – отечественные",
+        "flag": "ru",
         "items": [
           {
             "name": "Абрау Дюрсо",
@@ -593,7 +594,8 @@
       },
       {
         "id": "still-wine",
-        "title": "Тихие вина <svg class=\"flag\"><use href=\"#flag-ru\"></use></svg>",
+        "title": "Тихие вина",
+        "flag": "ru",
         "items": [
           {
             "name": "Высокий берег",
@@ -635,13 +637,15 @@
             "desc": "Полусладкое – белое, красное"
           },
           {
-            "name": "Фирмаменто <svg class=\"flag\"><use href=\"#flag-es\"></use></svg>",
+            "name": "Фирмаменто",
+            "flag": "es",
             "price": "1 290 ₽",
             "weight": "750 мл",
             "desc": "белое – сухое, полусладкое; красное – сухое, полусладкое"
           },
           {
-            "name": "Канья <svg class=\"flag\"><use href=\"#flag-cl\"></use></svg>",
+            "name": "Канья",
+            "flag": "cl",
             "price": "1 190 ₽",
             "weight": "750 мл",
             "desc": "белое – сухое, полусладкое; красное – сухое, полусладкое"
