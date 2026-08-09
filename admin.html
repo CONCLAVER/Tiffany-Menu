@@ -36,32 +36,6 @@
         </div>
     </div>
 
-    <!-- GitHub Token Setup -->
-    <div class="token-overlay" id="tokenOverlay" style="display: none;">
-        <div class="token-box">
-            <h2>Настройка GitHub API</h2>
-            <p>Для сохранения изменений нужен Personal Access Token от GitHub.</p>
-            <div class="token-instructions">
-                <ol>
-                    <li>Откройте <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a></li>
-                    <li>Нажмите "Generate new token (classic)"</li>
-                    <li>Note: <code>Tiffany Menu Admin</code></li>
-                    <li>Отметьте: <strong>repo</strong></li>
-                    <li>Скопируйте токен</li>
-                </ol>
-            </div>
-            <div class="form-group">
-                <label for="tokenInput">GitHub Token</label>
-                <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-            </div>
-            <div class="token-error" id="tokenError"></div>
-            <div class="token-actions">
-                <button class="btn btn-secondary" onclick="cancelTokenSetup()">Отмена</button>
-                <button class="btn btn-primary" onclick="saveToken()">Сохранить токен</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Admin Panel -->
     <div id="adminPanel" style="display: none;">
         <!-- Header -->
@@ -75,10 +49,6 @@
                 <button class="btn btn-secondary" onclick="location.href='index.html'">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                     Просмотр
-                </button>
-                <button class="btn btn-secondary" id="tokenBtn" onclick="showTokenSetup()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-                    <span id="tokenBtnText">Token</span>
                 </button>
                 <button class="btn btn-primary" id="saveBtn" onclick="saveAllChanges()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>

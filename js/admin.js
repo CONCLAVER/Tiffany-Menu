@@ -20,8 +20,9 @@
     var githubToken = localStorage.getItem('github_token') || '';
     var fileSha = '';
 
-    // GitHub API
-    var GITHUB_API = 'https://api.github.com/repos/' + CONFIG.repo + '/contents/' + CONFIG.filePath;
+    // Local API (replaces GitHub API)
+    var API_URL = 'api.php?action=read';
+    var API_SAVE_URL = 'api.php?action=save';
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function () {
@@ -83,49 +84,7 @@
         showLogin();
     };
 
-    // Token Management
-    window.showTokenSetup = function () {
-        document.getElementById('tokenOverlay').style.display = 'flex';
-        document.getElementById('tokenInput').value = githubToken;
-    };
-
-    window.cancelTokenSetup = function () {
-        document.getElementById('tokenOverlay').style.display = 'none';
-    };
-
-    window.saveToken = function () {
-        var token = document.getElementById('tokenInput').value.trim();
-        if (!token) {
-            showTokenError('Введите токен');
-            return;
-        }
-
-        githubToken = token;
-        localStorage.setItem('github_token', token);
-        document.getElementById('tokenOverlay').style.display = 'none';
-        updateTokenButton();
-        showToast('Token сохранён', 'success');
-    };
-
-    function showTokenError(msg) {
-        document.getElementById('tokenError').textContent = msg;
-    }
-
-    function updateTokenButton() {
-        var btn = document.getElementById('tokenBtn');
-        var text = document.getElementById('tokenBtnText');
-        if (githubToken) {
-            btn.classList.add('token-active');
-            if (text) text.textContent = 'Token ✓';
-            btn.title = 'Token настроен';
-        } else {
-            btn.classList.remove('token-active');
-            if (text) text.textContent = 'Token';
-            btn.title = 'Настроить GitHub Token';
-        }
-    }
-
-    // Load Menu from GitHub
+    // Load Menu from Local API
     function loadMenu() {
         var loading = document.getElementById('loading');
         var container = document.getElementById('categoriesContainer');
@@ -133,37 +92,22 @@
         loading.style.display = 'block';
         container.style.display = 'none';
 
-        if (!githubToken) {
-            loading.style.display = 'none';
-            container.style.display = 'block';
-            container.innerHTML = '<div class="empty-state"><p>Настройте GitHub Token для загрузки меню</p><button class="btn btn-primary" onclick="showTokenSetup()">Настроить Token</button></div>';
-            return;
-        }
-
-        fetch(GITHUB_API, {
-            headers: {
-                'Authorization': 'token ' + githubToken,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        })
-        .then(function (r) {
-            if (!r.ok) throw new Error('Ошибка загрузки: ' + r.status);
-            return r.json();
-        })
-        .then(function (data) {
-            fileSha = data.sha;
-            var bytes = Uint8Array.from(atob(data.content), function (c) { return c.charCodeAt(0); });
-            var content = new TextDecoder('utf-8').decode(bytes);
-            menuData = JSON.parse(content);
-            renderCategories();
-            loading.style.display = 'none';
-            container.style.display = 'block';
-        })
-        .catch(function (err) {
-            loading.style.display = 'none';
-            container.style.display = 'block';
-            container.innerHTML = '<div class="empty-state"><p>Ошибка загрузки: ' + err.message + '</p><button class="btn btn-primary" onclick="loadMenu()">Повторить</button></div>';
-        });
+        fetch(API_URL + '&t=' + Date.now())
+            .then(function (r) {
+                if (!r.ok) throw new Error('Ошибка загрузки: ' + r.status);
+                return r.json();
+            })
+            .then(function (data) {
+                menuData = data;
+                renderCategories();
+                loading.style.display = 'none';
+                container.style.display = 'block';
+            })
+            .catch(function (err) {
+                loading.style.display = 'none';
+                container.style.display = 'block';
+                container.innerHTML = '<div class="empty-state"><p>Ошибка загрузки: ' + err.message + '</p><button class="btn btn-primary" onclick="loadMenu()">Повторить</button></div>';
+            });
     }
 
     window.loadMenu = loadMenu;
@@ -436,48 +380,31 @@
         showToast('Позиция удалена', 'success');
     };
 
-    // Save to GitHub
+    // Save to Local API
     window.saveAllChanges = function () {
         if (!menuData) return;
-
-        if (!githubToken) {
-            showTokenSetup();
-            return;
-        }
 
         var btn = document.getElementById('saveBtn');
         var btnText = document.getElementById('saveBtnText');
         btn.disabled = true;
         btnText.textContent = 'Сохранение...';
 
-        var content = JSON.stringify(menuData, null, 2);
-        var encoded = btoa(unescape(encodeURIComponent(content)));
-
-        var body = {
-            message: 'Update menu via admin panel',
-            content: encoded,
-            sha: fileSha
-        };
-
-        fetch(GITHUB_API, {
-            method: 'PUT',
+        fetch(API_SAVE_URL, {
+            method: 'POST',
             headers: {
-                'Authorization': 'token ' + githubToken,
-                'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(menuData)
         })
         .then(function (r) {
             if (!r.ok) throw new Error('Ошибка сохранения: ' + r.status);
             return r.json();
         })
         .then(function (data) {
-            fileSha = data.content.sha;
             hasChanges = false;
             btn.disabled = false;
             btnText.textContent = '💾 Сохранить';
-            showToast('Изменения сохранены на GitHub', 'success');
+            showToast('Изменения сохранены', 'success');
         })
         .catch(function (err) {
             btn.disabled = false;
