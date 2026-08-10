@@ -615,37 +615,37 @@
                         "desc": "белое – сухое"
                     },
                     {
-                        "name": "VILLA ARISTOV Anima",
-                        "price": "240 ₽",
+                        "name": "VILLA ARISTOV Anima  по бокалам",
+                        "price": "270 ₽",
                         "weight": "150 мл"
                     },
                     {
                         "name": "VILLA ARISTOV Anima",
-                        "price": "990 ₽",
+                        "price": "1190 ₽",
                         "weight": "750 мл",
                         "desc": "Сухое – белое, красное"
                     },
                     {
-                        "name": "INKERMAN Winemaker's",
-                        "price": "240 ₽",
+                        "name": "INKERMAN Winemaker's  по бокалам",
+                        "price": "260 ₽",
                         "weight": "150 мл"
                     },
                     {
                         "name": "INKERMAN Winemaker's",
-                        "price": "990 ₽",
+                        "price": "1160 ₽",
                         "weight": "750 мл",
                         "desc": "Полусладкое – белое, красное"
                     },
                     {
                         "name": "Фирмаменто",
-                        "flag": "es",
-                        "price": "1 290 ₽",
+                        "price": "1 390 ₽",
                         "weight": "750 мл",
-                        "desc": "белое – сухое, полусладкое; красное – сухое, полусладкое"
+                        "desc": "белое – сухое, полусладкое; красное – сухое, полусладкое",
+                        "flag": "es"
                     },
                     {
                         "name": "Канья",
-                        "price": "1 190 ₽",
+                        "price": "1 390 ₽",
                         "weight": "750 мл",
                         "desc": "белое – сухое, полусладкое; красное – сухое, полусладкое",
                         "flag": "cl"
